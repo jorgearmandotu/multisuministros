@@ -6,9 +6,11 @@ use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -23,7 +25,10 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                //
+                TextInput::make('name')->label('Nombre: ')->required()->maxLength(255),
+                TextInput::make('email')->label('Correo eléctronico: ')->type('email')->required()->maxLength(255),
+                TextInput::make('position_of_company')->label('Cargo o posicion en la compañia: ')->required()->maxLength(255),
+                TextInput::make('password')->label('Contraseña de acceso: ')->password()->required()->dehydrateStateUsing(fn ($state) => bcrypt($state))->revealable(),
             ]);
     }
 
@@ -31,7 +36,9 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('name')->label('Nombre')->searchable()->sortable(),
+                TextColumn::make('position_of_company')->label('puesto en la empresa'),
+                TextColumn::make('email')->label('Correo Eléctronico'),
             ])
             ->filters([
                 //
