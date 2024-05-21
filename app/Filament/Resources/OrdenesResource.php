@@ -42,7 +42,12 @@ class OrdenesResource extends Resource
                 ])->label('Cliente: '),
                 DateTimePicker::make('hour_in'),
                 DateTimePicker::make('hour_out'),
-            ]);
+            ])
+            ->saved(function (Form $form, Ordenes $record) {
+                // Asigna el ID del usuario autenticado
+                $record->user_id = auth()->id();
+                $record->save();
+            });
     }
 
     public static function table(Table $table): Table
