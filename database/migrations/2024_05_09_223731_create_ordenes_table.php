@@ -17,13 +17,13 @@ return new class extends Migration
             $table->text('number');
             $table->text('type_service');
             $table->foreignId('client')->references('id')->on('clients');
-            $table->foreignId('technical')->references('id')->on('users');
+            $table->foreignId('user_id')->references('id')->on('users');
             $table->time('hour_in');
             $table->time('hour_out');
             $table->text('service_description');
             $table->text('used_components');
             $table->text('observations');
-            $table->text('technical_signature');
+            $table->text('technical');
             $table->text('client_signature');
             $table->text('work_done');
             $table->timestamps();

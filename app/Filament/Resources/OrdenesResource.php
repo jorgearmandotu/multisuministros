@@ -4,11 +4,14 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\OrdenesResource\Pages;
 use App\Filament\Resources\OrdenesResource\RelationManagers;
+use App\Models\Client;
 use App\Models\Ordenes;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -16,6 +19,8 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+
+use function Laravel\Prompts\select;
 
 class OrdenesResource extends Resource
 {
@@ -34,20 +39,30 @@ class OrdenesResource extends Resource
                     'Cableado estructurado' => 'Cableado estrucutrado',
                     'Camaras de seguridad' => 'Camaras de seguridad',
                 ])->label('Tipo de servicio: '),
-                Select::make('client')->options([
-                    'visita tecnica' => 'Visita Técnica',
+                Select::make('client')->options(Client::all()->pluck('name', 'id'))->label('Cliente: ')->searchable(),
+                Select::make('technical')->options([
+                    'visita' => 'Visita Técnica',
                     'Soporte técnico' => 'Soprte técnico',
                     'Cableado estructurado' => 'Cableado estrucutrado',
                     'Camaras de seguridad' => 'Camaras de seguridad',
                 ])->label('Cliente: '),
                 DateTimePicker::make('hour_in'),
                 DateTimePicker::make('hour_out'),
-            ])
-            ->saved(function (Form $form, Ordenes $record) {
-                // Asigna el ID del usuario autenticado
-                $record->user_id = auth()->id();
-                $record->save();
-            });
+                Textarea::make('service_description')->label('Descripción del servicio')->autosize(),
+                Textarea::make('used_components')->label('Componentes usados')->autosize(),
+                Textarea::make('work_done')->label('Trabajo realizado')->autosize(),
+                Textarea::make('observations')->label('Observaciones/Recomendaciones')->autosize(),
+                //user id
+                select::make('technical')->options(User::all()->pluck('name', 'id'))->label('tecnico')->searchable(),
+                //signature
+
+                ]);
+
+            // ->saved(function (Form $form, Ordenes $record) {
+            //     // Asigna el ID del usuario autenticado
+            //     $record->user_id = auth()->id();
+            //     $record->save();
+            // });
     }
 
     public static function table(Table $table): Table
