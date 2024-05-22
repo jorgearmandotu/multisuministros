@@ -19,6 +19,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Saade\FilamentAutograph\Forms\Components\SignaturePad;
 
 use function Laravel\Prompts\select;
 
@@ -54,8 +55,7 @@ class OrdenesResource extends Resource
                 Textarea::make('observations')->label('Observaciones/Recomendaciones')->autosize(),
                 //user id
                 select::make('technical')->options(User::all()->pluck('name', 'id'))->label('tecnico')->searchable(),
-                //signature
-
+                SignaturePad::make('client_signature')->label(__('Firma de cliente'))
                 ]);
 
             // ->saved(function (Form $form, Ordenes $record) {
