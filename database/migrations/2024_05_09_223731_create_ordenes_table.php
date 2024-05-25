@@ -20,12 +20,12 @@ return new class extends Migration
             $table->foreignId('user_id')->references('id')->on('users');
             $table->time('hour_in');
             $table->time('hour_out');
-            $table->text('service_description');
-            $table->text('used_components');
-            $table->text('observations');
+            $table->text('service_description')->nullable();
+            $table->text('used_components')->nullable();
+            $table->text('observations')->nullable();
             $table->text('technical');
-            $table->text('client_signature');
-            $table->text('work_done');
+            $table->text('client_signature')->nullable();
+            $table->text('work_done')->nullable();
             $table->timestamps();
         });
     }
