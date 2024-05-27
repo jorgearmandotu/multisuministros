@@ -41,12 +41,7 @@ class OrdenesResource extends Resource
                     'Camaras de seguridad' => 'Camaras de seguridad',
                 ])->label('Tipo de servicio: '),
                 Select::make('client')->options(Client::all()->pluck('name', 'id'))->label('Cliente: ')->searchable(),
-                Select::make('technical')->options([
-                    'visita' => 'Visita Técnica',
-                    'Soporte técnico' => 'Soprte técnico',
-                    'Cableado estructurado' => 'Cableado estrucutrado',
-                    'Camaras de seguridad' => 'Camaras de seguridad',
-                ])->label('Cliente: '),
+                Select::make('technical')->options(User::all()->pluck('name', 'id'))->label('Tecnico: '),
                 DateTimePicker::make('hour_in'),
                 DateTimePicker::make('hour_out'),
                 Textarea::make('service_description')->label('Descripción del servicio')->autosize(),
