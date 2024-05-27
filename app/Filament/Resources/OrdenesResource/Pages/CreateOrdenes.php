@@ -14,6 +14,7 @@ class CreateOrdenes extends CreateRecord
     {
         // Agregar la ID del usuario autenticado al array de datos del formulario
         $data['user_id'] = auth()->id();
+        $data['number'] = 'orden n1';
         
         return $data;
     }

@@ -50,7 +50,7 @@ class OrdenesResource extends Resource
                 Textarea::make('observations')->label('Observaciones/Recomendaciones')->autosize(),
                 //user id
                 select::make('technical')->options(User::all()->pluck('name', 'id'))->label('tecnico')->searchable(),
-                SignaturePad::make('client_signature')->label(__('Firma de cliente'))
+                SignaturePad::make('client_signature')->label(__('Firma de cliente'))->downloadable()
                 ]);
 
             // ->saved(function (Form $form, Ordenes $record) {

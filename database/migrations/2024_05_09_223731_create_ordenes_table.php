@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('ordenes', function (Blueprint $table) {
             $table->id();
             $table->date('date');
-            $table->text('number');
+            $table->text('number')->nullable();
             $table->text('type_service');
             $table->foreignId('client')->references('id')->on('clients');
             $table->foreignId('user_id')->references('id')->on('users');
