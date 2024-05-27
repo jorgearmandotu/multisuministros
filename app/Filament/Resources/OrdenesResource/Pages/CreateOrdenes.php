@@ -9,4 +9,12 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateOrdenes extends CreateRecord
 {
     protected static string $resource = OrdenesResource::class;
+
+    protected function mutateFormDataBeforeCreate(array $data): array
+    {
+        // Agregar la ID del usuario autenticado al array de datos del formulario
+        $data['user_id'] = auth()->id();
+        
+        return $data;
+    }
 }
