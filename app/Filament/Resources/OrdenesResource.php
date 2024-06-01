@@ -21,6 +21,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Saade\FilamentAutograph\Forms\Components\SignaturePad;
+use Illuminate\Support\Facades\URL;
 
 use function Laravel\Prompts\select;
 
@@ -68,6 +69,11 @@ class OrdenesResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                TAbles\Actions\Action::make('downloadPDF')
+                ->label('Descargar PDF')
+                ->icon('heroicon-o-download')
+                ->url(fn ($record) => URL::route('records.downloadPDF', ['id' => $record->id]))
+                ->openUrlInNewTab(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
