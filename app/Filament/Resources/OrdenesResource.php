@@ -16,6 +16,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -53,18 +54,14 @@ class OrdenesResource extends Resource
                 SignaturePad::make('client_signature')->label(__('Firma de cliente'))->downloadable()
                 ]);
 
-            // ->saved(function (Form $form, Ordenes $record) {
-            //     // Asigna el ID del usuario autenticado
-            //     $record->user_id = auth()->id();
-            //     $record->save();
-            // });
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('date')->label('Fecha')->sortable()->searchable(),
+                TextColumn::make('number')->label('Numero')->sortable()->searchable(),
             ])
             ->filters([
                 //

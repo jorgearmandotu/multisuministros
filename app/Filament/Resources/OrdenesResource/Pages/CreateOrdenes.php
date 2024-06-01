@@ -3,6 +3,9 @@
 namespace App\Filament\Resources\OrdenesResource\Pages;
 
 use App\Filament\Resources\OrdenesResource;
+use App\Models\Config;
+use App\Models\Ordenes;
+use Carbon\Carbon;
 use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
 
@@ -14,7 +17,12 @@ class CreateOrdenes extends CreateRecord
     {
         // Agregar la ID del usuario autenticado al array de datos del formulario
         $data['user_id'] = auth()->id();
-        $data['number'] = 'orden n1';
+        //verificar el ultimo numero de orden y sumarlo
+       $initial = Config::orderBy('created_at', 'desc')->first(); 
+        $ultimoRegistro = Ordenes::orderBy('created_at', 'desc')->first();
+        $numero = $ultimoRegistro ? $ultimoRegistro->number + 1 : $initial->initial;
+        $data['number'] = $numero;
+        //'ORD-'.Carbon::now()->year.'-2';
         
         return $data;
     }

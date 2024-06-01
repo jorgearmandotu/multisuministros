@@ -51,12 +51,7 @@ class DatabaseSeeder extends Seeder
             'position_of_company' => 'administradora comercial',
             'password' => bcrypt('Admin123.'),
         ]);
-        $user = User::create([
-            'name' => 'admin',
-            'email' => 'admin@gmail.com',
-            'position_of_company' => 'administrador',
-            'password' => bcrypt('Admin123.'),
-        ]);
+
 
         $client = Client::create([
             'identification_type' => 'NIT',
@@ -64,6 +59,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Clientes varios',
             'phone' => '111111',
             'address' => 'varios',
+            'email' => 'varios@gmail.com'
         ]);
 
         // $user->givePermissionTo('remision.index', 'remision.store', 'printRemision',
