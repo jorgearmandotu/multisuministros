@@ -19,7 +19,7 @@ class PDFOrdenesController extends Controller
         ];
 
 
-        $pdf = Pdf::loadView('pdf_template', $data);
+        $pdf = Pdf::loadView('pdfOrdenes_template', $data);
 
         return $pdf->download('record_'.$id.'.pdf');
     }

@@ -71,7 +71,7 @@ class OrdenesResource extends Resource
                 Tables\Actions\EditAction::make(),
                 TAbles\Actions\Action::make('downloadPDF')
                 ->label('Descargar PDF')
-                ->icon('heroicon-o-download')
+                //->icon('heroicon-o-download')
                 ->url(fn ($record) => URL::route('records.downloadPDF', ['id' => $record->id]))
                 ->openUrlInNewTab(),
             ])
