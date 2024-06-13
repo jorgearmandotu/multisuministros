@@ -16,6 +16,7 @@ class PDFOrdenesController extends Controller
         $data = [
             'date' => $record->date,
             'number' => $record->number,
+            'client_signature' => $record->client_signature,
         ];
 
 
