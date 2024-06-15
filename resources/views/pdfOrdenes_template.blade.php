@@ -14,7 +14,19 @@
         <tr>
             <th colspan="3"><p class="texto">El siguiente formato ha sido diseñado para la entrega al cliente de equipos y/o servicios </p></th>
         </tr>
-        <tr></tr>
+        <tr>
+            <th>Número de Orden</th>
+            <th>ORD-año-{{ $number }}</th>
+            <th></th>
+        </tr>
+        <tr>
+            <th>Tipo de servicios</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr>
+            <th colspan="3">DATOS DEL CLIENTE</th>
+        </tr>
     </table>
     <h1>Record</h1>
     <p><strong>Fecha:</strong> {{ $date }}</p>
