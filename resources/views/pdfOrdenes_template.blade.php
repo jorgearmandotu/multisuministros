@@ -5,64 +5,65 @@
     <title>Record PDF</title>
 </head>
 <body>
-    <table>
+    <table class="texto">
         <tr>
-            <th class="logo"><img src="assets/logo multisuministros.png" class="logo-img" style="max-width: 100px;"/><br><p id="sub-logo">“Tecnología avanzada para sus necesidades”<br>Nit: 901170291-3</p></th>
+            <th class="logo"><img src="assets/logo multisuministros.png" class="logo-img" style="max-width: 130px;"/><br><p id="sub-logo">“Tecnología avanzada para sus necesidades”<br>Nit: 901170291-3</p></th>
             <th colspan="3"><p class="title">ENTREGA EQUIPO Y/O TRABAJO REALIZADO</p></th>
             <th colspan="2"><p id="version">Código: FTRR-23-004<br>Versión: 001<br>Fecha Emisión:  12- Mayo -2023</p></th>
         </tr>
         <tr>
-            <th colspan="6"><p class="texto">El siguiente formato ha sido diseñado para la entrega al cliente de equipos y/o servicios </p></th>
+            <th colspan="6"><p>El siguiente formato ha sido diseñado para la entrega al cliente de equipos y/o servicios </p></th>
         </tr>
         <tr>
             <th>Número de Orden</th>
-            <th colspan="5">ORD-{{ $year }}-{{ $number }}</th>
+            <th colspan="5" class="texto">ORD-{{ $year }}-{{ $number }}</th>
         </tr>
         <tr>
             <th>Tipo de servicios</th>
-            <th colspan="5">{{ $tipo_servicio }}</th>
+            <th colspan="5" class="texto">{{ $tipo_servicio }}</th>
         </tr>
         <tr>
             <th colspan="6">DATOS DEL CLIENTE</th>
         </tr>
         <tr>
             <th>Nombre/Razon social:</th>
-            <th colspan="5">{{ $cliente->name }}</th>
+            <th colspan="5" class="texto">{{ $cliente->name }}</th>
         </tr>
         <tr>
             <th>Tipo de Documento:</th>
-            <th>{{ $cliente->identification_type }}</th>
+            <th class="texto">{{ $cliente->identification_type }}</th>
             <th>Número</th>
-            <th>{{ $cliente->identification_number }}</th>
+            <th class="texto">{{ $cliente->identification_number }}</th>
             <th>Télefono</th>
-            <th>{{ $cliente->phone }}</th>
+            <th class="texto">{{ $cliente->phone }}</th>
         </tr>
         <tr>
             <th colspan="6">Datos del Técnico</th>
         </tr>
         <tr>
             <th>Nombre:</th>
-            <th colspan="3">{{ $tecnico->name }}</th>
+            <th colspan="3" class="texto">{{ $tecnico->name }}</th>
             <th>Fecha:</th>
-            <th>{{ $date }}</th>
+            <th class="texto">{{ $date }}</th>
         </tr>
         <tr>
             <th>Hora de Entrada</th>
-            <th>{{ $horaEntrada }}</th>
-            <th>Hora de Salida</th>
-            <th>{{ $horaSalida }}</th>
+            <th colspan="2" class="texto">{{ $horaEntrada }}</th>
+            <th >Hora de Salida</th>
+            <th colspan="2" class="texto">{{ $horaSalida }}</th>
         </tr>
         <tr>
-            <th colspan="6">DESCRIPCION DEL EQUIPO* |DESCRIPCION DEL SERVICIO (*EQUIPO: MARCA, SISTEMA OPERATIVO, PUESTO DE TRABAJO, OTROS,)</th>
+            <th colspan="6"><p>DESCRIPCION DEL EQUIPO* |DESCRIPCION DEL SERVICIO (*EQUIPO: MARCA, SISTEMA OPERATIVO, PUESTO DE TRABAJO, OTROS,)</p></th>
         </tr>
         <tr>
-            <th colspan="6" class="descripciones"></th>
+            <th colspan="6" class="descripciones">{{ $descripcion }}</th>
         </tr>
         <tr>
             <th colspan="6">TRABAJO REALIZADO </th>
         </tr>
         <tr>
             <th colspan="6" class="descripciones">
+                {{ $trabajoRealizado }}
             </th>
         </tr>
         <tr>
@@ -70,6 +71,7 @@
         </tr>
         <tr>
             <th colspan="6" class="descripciones">
+                {{ $components }}
             </th>
         </tr>
         <tr>
@@ -77,6 +79,7 @@
         </tr>
         <tr>
             <th colspan="6" class="descripciones">
+                {{ $observaciones }}
             </th>
         </tr>
         <tr>

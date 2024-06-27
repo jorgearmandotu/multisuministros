@@ -25,6 +25,10 @@ class PDFOrdenesController extends Controller
             'tecnico' => $record->tecnico,
             'horaEntrada' => $record->hour_in,
             'horaSalida' => $record->hour_out,
+            'descripcion' => $record->service_description,
+            'trabajoRealizado' => $record->work_done,
+            'components' => $record->used_components,
+            'observaciones' => $record->observations,
         ];
 
 
