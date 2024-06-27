@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Ordenes extends Model
@@ -14,7 +15,7 @@ class Ordenes extends Model
         'date',
         'number',
         'type_service',
-        'client',
+        'client_id',
         'user_id',
         'hour_in',
         'hour_out',
@@ -26,14 +27,18 @@ class Ordenes extends Model
         'work_done',
     ];
 
-    public function client(): HasOne
+    public function client(): BelongsTo
     {
-        return $this->hasOne(Client::class);
+        return $this->belongsTo(Client::class, 'client_id');
     }
 
     public function user(): HasOne
     {
-        return $this->hasOne(User::class);
+        return $this->hasOne(User::class, 'id');
     }
 
+    public function tecnico(): HasOne
+    {
+        return $this->hasOne(User::class, 'id', 'technical' );
+    }
 }

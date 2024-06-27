@@ -42,7 +42,7 @@ class OrdenesResource extends Resource
                     'Cableado estructurado' => 'Cableado estrucutrado',
                     'Camaras de seguridad' => 'Camaras de seguridad',
                 ])->label('Tipo de servicio: '),
-                Select::make('client')->options(Client::all()->pluck('name', 'id'))->label('Cliente: ')->searchable(),
+                Select::make('client_id')->options(Client::all()->pluck('name', 'id'))->label('Cliente: ')->searchable(),
                 Select::make('technical')->options(User::all()->pluck('name', 'id'))->label('Tecnico: '),
                 DateTimePicker::make('hour_in'),
                 DateTimePicker::make('hour_out'),
@@ -52,7 +52,7 @@ class OrdenesResource extends Resource
                 Textarea::make('observations')->label('Observaciones/Recomendaciones')->autosize(),
                 //user id
                 select::make('technical')->options(User::all()->pluck('name', 'id'))->label('tecnico')->searchable(),
-                SignaturePad::make('client_signature')->label(__('Firma de cliente'))->downloadable()
+                SignaturePad::make('client_signature')->label(__('Firma de cliente'))->downloadable()->penColor('#000'),
                 ]);
 
     }

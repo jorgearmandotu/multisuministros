@@ -30,3 +30,10 @@ td, th{
 .texto{
     font-size: 10pt;
 }
+.descripciones{
+    height: 100pt;
+}
+#signature {
+    max-width: 200pt;
+    color: black;
+}

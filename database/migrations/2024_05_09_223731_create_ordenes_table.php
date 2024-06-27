@@ -16,14 +16,14 @@ return new class extends Migration
             $table->date('date');
             $table->text('number')->nullable();
             $table->text('type_service');
-            $table->foreignId('client')->references('id')->on('clients');
+            $table->foreignId('client_id')->references('id')->on('clients');
             $table->foreignId('user_id')->references('id')->on('users');
             $table->time('hour_in');
             $table->time('hour_out');
             $table->text('service_description')->nullable();
             $table->text('used_components')->nullable();
             $table->text('observations')->nullable();
-            $table->text('technical');
+            $table->text('technical')->references('id')->on('users');
             $table->text('client_signature')->nullable();
             $table->text('work_done')->nullable();
             $table->timestamps();
