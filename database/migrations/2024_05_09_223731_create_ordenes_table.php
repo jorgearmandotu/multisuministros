@@ -18,14 +18,15 @@ return new class extends Migration
             $table->text('type_service');
             $table->foreignId('client_id')->references('id')->on('clients');
             $table->foreignId('user_id')->references('id')->on('users');
-            $table->time('hour_in');
-            $table->time('hour_out');
+            $table->time('hour_in')->nullable();
+            $table->time('hour_out')->nullable();
             $table->text('service_description')->nullable();
             $table->text('used_components')->nullable();
             $table->text('observations')->nullable();
             $table->text('technical')->references('id')->on('users');
             $table->text('client_signature')->nullable();
             $table->text('work_done')->nullable();
+            $table->text('state')->default('Abierto');
             $table->timestamps();
         });
     }

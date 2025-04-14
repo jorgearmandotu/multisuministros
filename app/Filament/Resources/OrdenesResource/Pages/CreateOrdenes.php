@@ -20,7 +20,8 @@ class CreateOrdenes extends CreateRecord
         //verificar el ultimo numero de orden y sumarlo
        $initial = Config::orderBy('created_at', 'desc')->first(); 
         $ultimoRegistro = Ordenes::orderBy('created_at', 'desc')->first();
-        $numero = $ultimoRegistro ? $ultimoRegistro->number + 1 : $initial->initial;
+        $number = $initial ? $initial->initial : '1';
+        $numero = $ultimoRegistro ? $ultimoRegistro->number + 1 : $number;
         $data['number'] = $numero;
         //'ORD-'.Carbon::now()->year.'-2';
         

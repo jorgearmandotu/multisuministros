@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Client;
+use App\Models\ServiceType;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -40,7 +41,7 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('Admin123.'),
         ]);
         $user = User::create([
-            'name' => 'Sebastian',
+            'name' => 'Sebastian Cabrera',
             'email' => 'sebastian@gmail.com',
             'position_of_company' => 'admon proxmox',
             'password' => bcrypt('Admin123.'),
@@ -48,7 +49,19 @@ class DatabaseSeeder extends Seeder
         $user = User::create([
             'name' => 'Claudia',
             'email' => 'claudia@gmail.com',
-            'position_of_company' => 'administradora comercial',
+            'position_of_company' => 'administradora general de empresa',
+            'password' => bcrypt('Admin123.'),
+        ]);
+        $user = User::create([
+            'name' => 'Diego Banda',
+            'email' => 'Diego@gmail.com',
+            'position_of_company' => 'Auxiliar de operaciones',
+            'password' => bcrypt('Admin123.'),
+        ]);
+        $user = User::create([
+            'name' => 'Jorge Armando Urbina',
+            'email' => 'jorge@gmail.com',
+            'position_of_company' => 'Infraestructura',
             'password' => bcrypt('Admin123.'),
         ]);
 
@@ -60,6 +73,59 @@ class DatabaseSeeder extends Seeder
             'phone' => '111111',
             'address' => 'varios',
             'email' => 'varios@gmail.com'
+        ]);
+        $client = Client::create([
+            'identification_type' => 'NIT',
+            'identification_number' => '901139195',
+            'name' => 'AGRO VETERINARIA ADESUR',
+            'phone' => '',
+            'address' => '',
+            'email' => ''
+        ]);
+        $client = Client::create([
+            'identification_type' => 'NIT',
+            'identification_number' => '805029389',
+            'name' => 'AGROPECUARIA LA SEVILLANA SAS ES REORGANIZACION',
+            'phone' => '',
+            'address' => '',
+            'email' => ''
+        ]);
+        $client = Client::create([
+            'identification_type' => 'NIT',
+            'identification_number' => '900613286',
+            'name' => 'ANDINA DE MATERIALES SAS',
+            'phone' => '',
+            'address' => '',
+            'email' => ''
+        ]);
+        $client = Client::create([
+            'identification_type' => 'NIT',
+            'identification_number' => '95163654',
+            'name' => 'CAMARONERA SAN ANTONIO',
+            'phone' => '',
+            'address' => '',
+            'email' => ''
+        ]);
+        $typeService = ServiceType::create([
+            'name' => 'SERVICIO TECNICO',
+        ]);
+        $typeService = ServiceType::create([
+            'name' => 'GARANTIA',
+        ]);
+        $typeService = ServiceType::create([
+            'name' => 'REPARACION DE EQUIPO',
+        ]);
+        $typeService = ServiceType::create([
+            'name' => 'SOPORTE REMOTO',
+        ]);
+        $typeService = ServiceType::create([
+            'name' => 'KEY ACCOUNT',
+        ]);
+        $typeService = ServiceType::create([
+            'name' => 'REDES E INFRAESTRUCTURA',
+        ]);
+        $typeService = ServiceType::create([
+            'name' => 'OTROS',
         ]);
 
         // $user->givePermissionTo('remision.index', 'remision.store', 'printRemision',

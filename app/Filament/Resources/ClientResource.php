@@ -45,6 +45,7 @@ class ClientResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('identification_number')->label('NIT/CC')->searchable()->sortable(),
                 TextColumn::make('name')->label('Nombre')->searchable()->sortable(),
                 TextColumn::make('phone')->label('Teléfono'),
                 TextColumn::make('address')->label('Dirección'),

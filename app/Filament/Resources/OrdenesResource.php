@@ -6,6 +6,7 @@ use App\Filament\Resources\OrdenesResource\Pages;
 use App\Filament\Resources\OrdenesResource\RelationManagers;
 use App\Models\Client;
 use App\Models\Ordenes;
+use App\Models\ServiceType;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
@@ -36,12 +37,7 @@ class OrdenesResource extends Resource
         return $form
             ->schema([
                 DatePicker::make('date')->label('Fecha: ')->required()->label('Fecha: '),
-                Select::make('type_service')->options([
-                    'visita tecnica' => 'Visita Técnica',
-                    'Soporte técnico' => 'Soprte técnico',
-                    'Cableado estructurado' => 'Cableado estrucutrado',
-                    'Camaras de seguridad' => 'Camaras de seguridad',
-                ])->label('Tipo de servicio: '),
+                Select::make('type_service')->options(ServiceType::all()->pluck('name', 'name'))->label('Tipo de servicio: ')->searchable(),
                 Select::make('client_id')->options(Client::all()->pluck('name', 'id'))->label('Cliente: ')->searchable(),
                 Select::make('technical')->options(User::all()->pluck('name', 'id'))->label('Tecnico: '),
                 DateTimePicker::make('hour_in'),
@@ -51,6 +47,13 @@ class OrdenesResource extends Resource
                 Textarea::make('work_done')->label('Trabajo realizado')->autosize(),
                 Textarea::make('observations')->label('Observaciones/Recomendaciones')->autosize(),
                 //user id
+                Select::make('state')->options([
+                    'Abierto'=>'Abierto',
+                    'Pendiente'=>'Pendiente',
+                    'Cerrado'=>'Cerrado',
+                    'Cancelado'=>'Cancelado',
+                    'En espera'=>'En espera',
+                ])->label('Estado de orden'),
                 select::make('technical')->options(User::all()->pluck('name', 'id'))->label('tecnico')->searchable(),
                 SignaturePad::make('client_signature')->label(__('Firma de cliente'))->downloadable()->penColor('#000'),
                 ]);
@@ -63,6 +66,8 @@ class OrdenesResource extends Resource
             ->columns([
                 TextColumn::make('date')->label('Fecha')->sortable()->searchable(),
                 TextColumn::make('number')->label('Numero')->sortable()->searchable(),
+                TextColumn::make('tecnico.name')->label('Responsable')->sortable()->searchable(),
+                TextColumn::make('state')->label('Estado')->sortable()->searchable(),
             ])
             ->filters([
                 //

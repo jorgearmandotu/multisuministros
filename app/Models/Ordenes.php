@@ -25,6 +25,7 @@ class Ordenes extends Model
         'technical',
         'client_signature',
         'work_done',
+        'state',
     ];
 
     public function client(): BelongsTo
