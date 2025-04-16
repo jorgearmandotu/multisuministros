@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\UserResource\Pages;
-use App\Filament\Resources\UserResource\RelationManagers;
-use App\Models\User;
+use App\Filament\Resources\ConfigResource\Pages;
+use App\Filament\Resources\ConfigResource\RelationManagers;
+use App\Models\Config;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -15,9 +15,9 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class UserResource extends Resource
+class ConfigResource extends Resource
 {
-    protected static ?string $model = User::class;
+    protected static ?string $model = Config::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -25,10 +25,7 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('name')->label('Nombre: ')->required()->maxLength(255),
-                TextInput::make('email')->label('Correo eléctronico: ')->type('email')->required()->maxLength(255),
-                TextInput::make('position_of_company')->label('Cargo o posicion en la compañia: ')->required()->maxLength(255),
-                TextInput::make('password')->label('Contraseña de acceso: ')->password()->required()->dehydrateStateUsing(fn ($state) => bcrypt($state))->revealable(),
+                TextInput::make('initial')->type('number')->label('Numero iniciak de ordenes'),
             ]);
     }
 
@@ -36,9 +33,8 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')->label('Nombre')->searchable()->sortable(),
-                TextColumn::make('position_of_company')->label('puesto en la empresa'),
-                TextColumn::make('email')->label('Correo Eléctronico'),
+                TextColumn::make('initial')->label('Numero inicial ordenes')->searchable(),
+                TextColumn::make('updated_at')->label('Ultima modificación')->searchable()->sortable(),
             ])
             ->filters([
                 //
@@ -63,9 +59,9 @@ class UserResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListUsers::route('/'),
-            'create' => Pages\CreateUser::route('/create'),
-            'edit' => Pages\EditUser::route('/{record}/edit'),
+            'index' => Pages\ListConfigs::route('/'),
+            'create' => Pages\CreateConfig::route('/create'),
+            'edit' => Pages\EditConfig::route('/{record}/edit'),
         ];
     }
 }

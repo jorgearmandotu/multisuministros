@@ -2,10 +2,12 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\UserResource\Pages;
-use App\Filament\Resources\UserResource\RelationManagers;
-use App\Models\User;
+use App\Filament\Resources\ClientResource\Pages;
+use App\Filament\Resources\ClientResource\RelationManagers;
+use App\Models\Client;
+use Filament\Facades\Filament;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -15,9 +17,9 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class UserResource extends Resource
+class ClientResource extends Resource
 {
-    protected static ?string $model = User::class;
+    protected static ?string $model = Client::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -25,10 +27,17 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
+                Select::make('identification_type')->label('Tipo de identificacón: ')->required()
+                ->options([
+                    'CC' => 'CC',
+                    'NIT' => 'Nit',
+                    'CE' => 'Cedula Extranjeria',
+                ]),
+                TextInput::make('identification_number')->label('Numero de Identificación: ')->type('number')->required()->maxLength(15),
                 TextInput::make('name')->label('Nombre: ')->required()->maxLength(255),
+                TextInput::make('phone')->label('Télefono: ')->type('number')->required()->maxLength(15),
+                TextInput::make('address')->label('Dirección: ')->required()->maxLength(255),
                 TextInput::make('email')->label('Correo eléctronico: ')->type('email')->required()->maxLength(255),
-                TextInput::make('position_of_company')->label('Cargo o posicion en la compañia: ')->required()->maxLength(255),
-                TextInput::make('password')->label('Contraseña de acceso: ')->password()->required()->dehydrateStateUsing(fn ($state) => bcrypt($state))->revealable(),
             ]);
     }
 
@@ -36,9 +45,10 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('identification_number')->label('NIT/CC')->searchable()->sortable(),
                 TextColumn::make('name')->label('Nombre')->searchable()->sortable(),
-                TextColumn::make('position_of_company')->label('puesto en la empresa'),
-                TextColumn::make('email')->label('Correo Eléctronico'),
+                TextColumn::make('phone')->label('Teléfono'),
+                TextColumn::make('address')->label('Dirección'),
             ])
             ->filters([
                 //
@@ -63,9 +73,9 @@ class UserResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListUsers::route('/'),
-            'create' => Pages\CreateUser::route('/create'),
-            'edit' => Pages\EditUser::route('/{record}/edit'),
+            'index' => Pages\ListClients::route('/'),
+            'create' => Pages\CreateClient::route('/create'),
+            'edit' => Pages\EditClient::route('/{record}/edit'),
         ];
     }
 }
