@@ -55,7 +55,7 @@ class OrdenesResource extends Resource
                     'En espera'=>'En espera',
                 ])->label('Estado de orden'),
                 select::make('technical')->options(User::all()->pluck('name', 'id'))->label('tecnico')->searchable(),
-                SignaturePad::make('client_signature')->label(__('Firma de cliente'))->downloadable()->penColor('#000'),
+                SignaturePad::make('client_signature')->label(__('Firma de cliente'))->penColor('#000000'),
                 ]);
 
     }
