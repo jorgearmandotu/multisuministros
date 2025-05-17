@@ -9,16 +9,24 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use App\Models\User;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
     
     public function login(Request $request) {
-        $request->validate([
+        //dd($request->all());
+        $validator = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required',
             //'device_name' => 'required',
         ]);
+        
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422); // Código de estado para errores de validación
+        }
+
+        $data = $request->all();
         
         $user = User::where('email', $request->email)->first();
         
