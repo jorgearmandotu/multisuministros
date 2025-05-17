@@ -28,9 +28,9 @@ class AuthController extends Controller
 
         $data = $request->all();
         
-        $user = User::where('email', $request->email)->first();
+        $user = User::where('email', $data['email'])->first();
         
-        if (! $user || !Hash::check($request->password, $user->password)) {
+        if (! $user || !Hash::check($data['password'], $user->password)) {
             return response(['message' => 'Datos incorrectos'], 401);
             throw ValidationException::withMessages([
                 'email' => ['The provided credentials are incorrect.'],
