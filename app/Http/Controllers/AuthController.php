@@ -23,7 +23,9 @@ class AuthController extends Controller
         ]);
         
         if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422); // Código de estado para errores de validación
+            return response()->json([
+                'status' => 'fail',
+                'message' => $validator->errors()], 422); // Código de estado para errores de validación
         }
 
         $data = $request->all();
@@ -31,19 +33,25 @@ class AuthController extends Controller
         $user = User::where('email', $data['email'])->first();
         
         if (! $user || !Hash::check($data['password'], $user->password)) {
-            return response(['message' => 'Datos incorrectos'], 401);
+            return response()->json([
+                'status' => 'fail',
+                'message' => 'Credenciales Invalidas'], 401);
             throw ValidationException::withMessages([
                 'email' => ['The provided credentials are incorrect.'],
             ]);
         }
         
+        $userData = [
+            'name' => $user->name,
+            'email' => $user->email,
+            'token' => $user->createToken('auth_token')->plainTextToken
+        ];
+        
         return response()
         ->json([
-            'success'=>'true',
-            'usuario' => $user->name,
-            'email' => $user->email,
-            'token' => $user->createToken('auth_token')->plainTextToken,
-        ]);
+            'status'=>'success',
+            'data'=> $userData
+        ], 200);
         //return $user->createToken($request->device_name)->plainTextToken;
     }
 
